@@ -1,22 +1,24 @@
 const express = require('express')
 const app = express()
+const ejs = require('ejs')
+const fs = require('fs')
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-
+app.use(express.static('upload'))
 app.set('view engine', 'ejs')
 
-const { productModel } = require('./schema.js')
+const { movieModel } = require('./schema.js')
 
-    // home
-    app.get('/', (req, res) => {
-        res.render('./Pages/home')
-    })
+// home
+app.get('/', (req, res) => {
+    res.render('./Pages/home')
+})
 
 // retrive Data
-app.get('/booklist', async (req, res) => {
-    const books = await productModel.find()
+app.get('/movielist', async (req, res) => {
+    const books = await movieModel.find()
     res.render('./Pages/index', { books: books })
 })
 
@@ -29,7 +31,7 @@ app.get('/addbook', (req, res) => {
 app.post('/addbook', async (req, res) => {
     const book = req.body;
 
-    const newBook = new productModel(book);
+    const newBook = new movieModel(book);
     await newBook.save();
 
     res.redirect('/booklist')
@@ -39,7 +41,7 @@ app.post('/addbook', async (req, res) => {
 // deleteData
 app.get('/deleteBook/:id', async (req, res) => {
     const userId = req.params.id;
-    var result = await productModel.deleteOne(({ _id: userId }))
+    var result = await movieModel.deleteOne(({ _id: userId }))
     res.redirect('/booklist')
 })
 
@@ -47,7 +49,7 @@ app.get('/deleteBook/:id', async (req, res) => {
 app.get('/editBook/:id', async (req, res) => {
     const userId = req.params.id;
 
-    const book = await productModel.findById(userId);
+    const book = await movieModel.findById(userId);
 
     res.render('./Pages/editbook', { book });
 })
@@ -57,12 +59,12 @@ app.post('/editBook/:id', async (req, res) => {
     const userId = req.params.id;
     const updatedBookData = req.body;
 
-    const updatedBook = await productModel.findByIdAndUpdate(userId, updatedBookData, { new: true });
+    const updatedBook = await movieModel.findByIdAndUpdate(userId, updatedBookData, { new: true });
 
     res.redirect('/booklist');
 })
 
 // port Listen at
-app.listen(9000, () => {
-    console.log('Server Start');
+app.listen(8000, () => {
+    console.log('Server Start at port 8000');
 })

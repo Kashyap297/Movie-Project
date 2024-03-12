@@ -1,38 +1,33 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/bookStore')
+mongoose.connect('mongodb://localhost:27017/kashyapMovieProj')
 
-const productSchema = new mongoose.Schema({
-    bookid: {
-        type: Number,
-        required: true,
-    },
+const movieSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
     },
-    booktype: {
+    description :{
         type: String,
         required: true,
     },
-    stock: {
+    year: {
         type: Number,
         required: true,
     },
-    price: {
-        type: Number,
-        required: true,
-    },
-    publishdate: {
-        type: Date,
-        required: true,
-    },
-    author: {
+    genre: {
         type: String,
         required: true,
-    }
-
+    },
+    rating: {
+        type: Number,
+        required: true,
+    },
+    movimage: {
+        type: String,
+        required: true,
+    },
 }, { timestamps: true })
 
-const productModel = mongoose.model('Book', productSchema)
+const movieModel = mongoose.model('movie', movieSchema)
 
-module.exports = { productModel }
+module.exports = { movieModel }

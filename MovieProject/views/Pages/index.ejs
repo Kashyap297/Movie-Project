@@ -1,64 +1,36 @@
 <%- include('../Partials/Header') %>
-    <div class="d-flex align-items-center justify-content-center vh-80">
-        <div class="col-10">
-            <div class="card p-3 shadow-lg">
-                <div class="table-responsive">
-                    <table class="table table-light table-striped table-hover table-bordered align-middle text-center caption-top">
-                        <caption class="m-0 pt-0">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <p class="fs-2 m-0 fw-semibold">Books Store</p>
-                                <a href="/addbook" class="btn btn-dark">Add Book</a>
+    <div class="container-fluid px-5">
+        <div class="row align-items-center justify-content-center vh-80 ">
+            <div class="col-4">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://i.pinimg.com/236x/64/65/d8/6465d8f562072ee6fe7ea6dce06cea4d.jpg"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h5 class="card-title m-0 text-danger">Movie title</h5>
+                                    <span class="px-3 py-2 text-white bg-dark rounded-pill "> Action</span>
+                                </div>
+                                <p class="card-text mt-2 mb-1">
+                                    movie Description,
+                                    This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="text-end mt-3">
+                                    <span class="px-3 py-1 border border-success rounded-pill align-self-end"> Year : 1980</span>
+                                </div>
+                                <div class="text-end mt-3 d-flex align-items-center justify-content-between">
+                                    <span class="px-3 py-1 bg-light text-warning border border-warning rounded-pill "> Rating : </span>
+                                    <div>
+                                        <button class="btn btn-outline-dark">Edit</button>
+                                        <button class="btn btn-outline-dark">Delete</button>
+                                    </div>
+                                </div>
                             </div>
-                        </caption>
-                        <thead class="table-dark">
-                            <tr>
-                                <th>Sr.</th>
-                                <th>Book ID</th>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Stock</th>
-                                <th>Price</th>
-                                <th>Published @</th>
-                                <th>Author</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% books.forEach((book, index)=> { %>
-                                <tr>
-                                    <td>
-                                        <%=index + 1%>
-                                    </td>
-                                    <td>
-                                        <%=book.bookid%>
-                                    </td>
-                                    <td>
-                                        <%=book.title%>
-                                    </td>
-                                    <td>
-                                        <%=book.booktype%>
-                                    </td>
-                                    <td>
-                                        <%=book.stock%>
-                                    </td>
-                                    <td>
-                                        <%=book.price%>
-                                    </td>
-                                    <td>
-                                        
-                                        <%= book.publishdate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
-                                    </td>
-                                    <td>
-                                        <%=book.author%>
-                                    </td>
-                                    <td>
-                                        <a href="/editBook/<%= book._id %>" class="btn btn-outline-success">Edit</a>
-                                        <a href="/deleteBook/<%= book._id %>" class="btn btn-outline-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
