@@ -18,15 +18,15 @@
     <title>Document</title>
 </head>
 <style>
-
     .vh-80 {
         height: 80vh;
     }
 
-    *{
+    * {
         font-family: "Poppins", sans-serif;
     }
-    tr>td{
+
+    tr>td {
         text-transform: capitalize;
     }
 
@@ -35,21 +35,23 @@
         -webkit-appearance: none;
         margin: 0;
     }
-
 </style>
 
 <body class="text-white bg-dark">
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav shadow col-12 px-4 py-2 gap-3 ">
-                    <li class="nav-item">
-                        <a class="nav-link  fs-6 text-light" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-6 text-light" href="/movielist"> Movie List </a>
-                    </li>
-                </ul>
-            </div>
+            <!-- <div class="row align-items-center justify-content-between"> -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav shadow col-12 px-4 py-2 gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link  fs-6 text-light" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-6 text-light" href="/movielist"> Movie List </a>
+                        </li>
+                        <a href="/addmovie" class="btn btn-outline-light ms-auto">Add Movie</a>
+                    </ul>
+                </div>
+            <!-- </div> -->
         </div>
     </nav>

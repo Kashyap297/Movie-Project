@@ -1,9 +1,9 @@
 <%- include('../Partials/Header') %>
     <div class="d-flex align-items-center justify-content-center vh-80">
         <div class="col-4">
-            <form action="/addbook" method="post" class="border p-3  rounded bg-white shadow-lg"
-                onsubmit="return validateForm(this)">
-                <h3 class="text-secondary text-center mb-3">Book Store Manager</h3>
+            <form action="/upload" method="POST" class="border p-3  rounded bg-white shadow-lg"
+                onsubmit="return validateForm(this)" enctype="multipart/form-data">
+                <h3 class="text-secondary text-center mb-3">Create New Movie</h3>
                 <div class="d-flex">
                     <div class="col-4">
                         <div class="d-flex justify-content-between">

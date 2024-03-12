@@ -18,13 +18,13 @@ app.get('/', (req, res) => {
 
 // retrive Data
 app.get('/movielist', async (req, res) => {
-    const books = await movieModel.find()
-    res.render('./Pages/index', { books: books })
+    const movies = await movieModel.find()
+    res.render('./Pages/index', { movies: movies })
 })
 
 // add data
-app.get('/addbook', (req, res) => {
-    res.render('./Pages/addbook')
+app.get('/addmovie', (req, res) => {
+    res.render('./Pages/addmovie')
 })
 
 // post data
