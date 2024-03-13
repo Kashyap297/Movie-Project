@@ -66,7 +66,6 @@ app.post('/upload', async (req, res) => {
                 res.redirect('/movielist');
             } catch (error) {
                 console.error(error);
-                res.status(500).send("Error saving movie details.");
             }
         } else {
 
@@ -112,6 +111,10 @@ app.post('/editData/:id', async (req, res) => {
                 rating: req.body.rating,
             };
 
+            if (!/^\d{4}$/.test(details.year)) {
+                return res.status(400).send("Invalid year format.");
+            }
+            
             // Check if a new file is uploaded
             if (req.file) {
                 // Delete old movie poster file
@@ -135,7 +138,6 @@ app.post('/editData/:id', async (req, res) => {
             res.redirect('/movielist');
         } catch (error) {
             console.error(error);
-            res.status(500).send("Error updating movie details.");
         }
     });
 });
