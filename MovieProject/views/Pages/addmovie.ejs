@@ -4,74 +4,83 @@
             <form action="/upload" method="POST" class="border p-3  rounded bg-white shadow-lg"
                 onsubmit="return validateForm(this)" enctype="multipart/form-data">
                 <h3 class="text-secondary text-center mb-3">Create New Movie</h3>
-                <div class="d-flex">
-                    <div class="col-4">
-                        <div class="d-flex justify-content-between">
-                            <label for="" class="text-secondary">ID :</label>
-                            <p class="text-danger m-0" id="bookidError"></p>
-                        </div>
-                        <input type="number" name="bookid" class="form-control" placeholder="Enter Book ID">
+
+                <div class="col-12 mt-2">
+                    <div class="d-flex justify-content-between">
+                        <label for="" class="text-secondary">Movie Title :</label>
+                        <p class="text-danger m-0" id="nameError"></p>
                     </div>
+                    <input type="text" name="title" class="form-control" placeholder="Enter Movie Title">
                 </div>
                 <div class="col-12 mt-2">
                     <div class="d-flex justify-content-between">
-                        <label for="" class="text-secondary">Book Title :</label>
-                        <p class="text-danger m-0" id="nameError"></p>
+                        <label for="" class="text-secondary">Movie description :</label>
+                        <p class="text-danger m-0" id="descError"></p>
                     </div>
-                    <input type="text" name="title" class="form-control" placeholder="Enter Book Title">
+                    <input type="text" name="description" class="form-control" placeholder="Enter Movie description">
                 </div>
                 <div class="d-flex align-items-center gap-2 mt-2">
                     <div class="col-4">
-                        <div class="d-flex">
-                            <label for="dropdown" class="text-secondary me-3">Type :</label>
-                            <p class="text-danger m-0 ms-4" id="typeError"></p>
+                        <div class="d-flex justify-content-between">
+                            <label for="" class="text-secondary">Year :</label>
+                            <p class="text-danger m-0" id="yearError"></p>
                         </div>
-                        <select id="dropdown" class="form-control" name="booktype">
-                            <option value="--Select Type--" selected>--Select Type--</option>
-                            <option value="Novels">Novels</option>
-                            <option value="Short Stories">Short Stories</option>
-                            <option value="History">History</option>
-                            <option value="Science and Nature">Science and Nature</option>
-                            <option value="Books on Coding">Books on Coding</option>
-                            <option value="Classic Poetry">Classic Poetry</option>
-                            <option value="Tech Magazines">Tech Magazines</option>
-                            <option value="Food Magazines">Food Magazines</option>
-                            <option value="Fashion and Lifestyle Magazines">Fashion and Lifestyle Magazines</option>
-                        </select>
+                        <input type="number" name="year" class="form-control" placeholder="Released Year">
                     </div>
                     <div class="col-4">
-                        <div class="d-flex justify-content-between">
-                            <label for="" class="text-secondary">Stock :</label>
-                            <p class="text-danger m-0" id="stockError"></p>
+                        <div class="d-flex">
+                            <label for="dropdown" class="text-secondary me-3">Genre :</label>
+                            <p class="text-danger m-0 ms-4" id="genreError"></p>
                         </div>
-                        <input type="number" name="stock" class="form-control" placeholder="Available Qty">
+                        <select id="dropdown" class="form-control" name="genre">
+                            <option value="--Select Genre--" selected>--Select Genre--</option>
+                            <option value="Action">Action</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Sci-">Sci-Fi</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Animation">Animation</option>
+                            <option value="Musical">Musical</option>
+                            <option value="Historical">Historical</option>
+                            <option value="Documentary">Documentary</option>
+                        </select>
                     </div>
                     <div class="col-4 pe-3">
-                        <div class="d-flex justify-content-between">
-                            <label for="" class="text-secondary">Price :</label>
-                            <p class="text-danger m-0" id="priceError"></p>
+                        <div class="d-flex">
+                            <label for="dropdown" class="text-secondary me-3">Rating :</label>
+                            <p class="text-danger m-0 ms-4" id="ratingError"></p>
                         </div>
-                        <input type="number" name="price" class="form-control" placeholder="Price of Book">
+                        <select id="dropdown" class="form-control" name="rating">
+                            <option value="--rating--" selected>--Rating--</option>
+                            <option value="0.5">0.5</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3.5</option>
+                            <option value="4">4</option>
+                            <option value="4.5">4.5</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
+
+
                 </div>
-                <div class="row mt-2">
-                    <div class="col-6">
-                        <div class="d-flex justify-content-between">
-                            <label for="" class="text-secondary">Book Launched Date:</label>
-                            <p class="text-danger m-0" id="dateError"></p>
-                        </div>
-                        <input type="date" name="publishdate" class="form-control">
+                <div class="col-12 mt-3">
+                    <div class="d-flex justify-content-between">
+                        <label for="dropdown" class="text-secondary me-3">Movie Poster :</label>
+                        <p class="text-danger m-0 ms-4" id="picError"></p>
                     </div>
-                    <div class="col-6">
-                        <div class="d-flex justify-content-between">
-                            <label for="" class="text-secondary">Author :</label>
-                            <p class="text-danger m-0" id="authorError"></p>
-                        </div>
-                        <input type="text" name="author" class="form-control" placeholder="Book's Author">
-                    </div>
+                    <input type="file" name="file" class="form-control">
                 </div>
 
-                <div class="text-center">
+                <div class="text-center mt-2">
                     <button class="btn btn-outline-dark mt-2 text-center">Submit</button>
                 </div>
             </form>
@@ -81,21 +90,15 @@
         <script>
             const validateForm = (e) => {
                 let isValid = true;
-                const bookError = document.getElementById("bookidError");
                 const nameError = document.getElementById("nameError");
-                const typeError = document.getElementById("typeError");
-                const stockError = document.getElementById("stockError");
-                const priceError = document.getElementById("priceError");
+                const descError = document.getElementById("descError");
+                const yearError = document.getElementById("yearError");
+                const genreError = document.getElementById("genreError");
+                const ratingError = document.getElementById("ratingError");
+                const picError = document.getElementById("picError");
+
                 const authorError = document.getElementById("authorError");
                 const dateError = document.getElementById("dateError");
-
-
-                if (e.bookid.value === "") {
-                    bookError.innerText = "Book ID Required*";
-                    isValid = false;
-                } else {
-                    bookError.innerText = ""
-                }
 
                 if (e.title.value === "") {
                     nameError.innerText = "Title Required*";
@@ -103,41 +106,37 @@
                 } else {
                     nameError.innerText = ""
                 }
-
-                if (e.booktype.value === "" || e.booktype.value === "--Select Type--") {
-                    typeError.innerText = "Select Type*";
+                if (e.description.value === "") {
+                    descError.innerText = "Description Required*";
                     isValid = false;
                 } else {
-                    typeError.innerText = ""
+                    descError.innerText = ""
                 }
-
-                if (e.stock.value === "") {
-                    stockError.innerText = "Stock Required*";
+                if (e.year.value === "") {
+                    yearError.innerText = "Year Required*";
                     isValid = false;
                 } else {
-                    stockError.innerText = ""
+                    yearError.innerText = ""
                 }
-
-                if (e.price.value === "") {
-                    priceError.innerText = "Price Required*";
+                if (e.genre.value === "" || e.genre.value === "--Select Genre--") {
+                    genreError.innerText = "Required*";
                     isValid = false;
                 } else {
-                    priceError.innerText = ""
+                    genreError.innerText = ""
                 }
-
-                if (e.author.value === "") {
-                    authorError.innerText = "Author Required*";
+                if (e.rating.value === "" || e.rating.value === "--rating--") {
+                    ratingError.innerText = "Required*";
                     isValid = false;
                 } else {
-                    authorError.innerText = ""
+                    ratingError.innerText = ""
                 }
-
-                if (e.publishdate.value === "") {
-                    dateError.innerText = "Date Required*";
+                if (!e.file.value) {
+                    picError.innerText = "Please select a movie poster*";
                     isValid = false;
                 } else {
-                    dateError.innerText = ""
+                    picError.innerText = "";
                 }
+
                 return isValid
             }
         </script>
