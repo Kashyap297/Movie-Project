@@ -1,39 +1,45 @@
 <%- include('../Partials/Header') %>
     <div class="container-fluid px-5">
         <div class="row align-items-center justify-content-center vh-80 ">
-            
-            <div class="col-4">
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://i.pinimg.com/236x/64/65/d8/6465d8f562072ee6fe7ea6dce06cea4d.jpg"
-                                class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title m-0 text-danger">Movie title</h5>
-                                    <span class="px-3 py-2 text-white bg-dark rounded-pill "> Action</span>
-                                </div>
-                                <p class="card-text mt-2 mb-1">
-                                    movie Description,
-                                    This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="text-end mt-3">
-                                    <span class="px-3 py-1 border border-success rounded-pill align-self-end"> Year : 1980</span>
-                                </div>
-                                <div class="text-end mt-3 d-flex align-items-center justify-content-between">
-                                    <span class="px-3 py-1 bg-light text-warning border border-warning rounded-pill "> Rating : </span>
-                                    <div>
-                                        <button class="btn btn-outline-dark">Edit</button>
-                                        <button class="btn btn-outline-dark">Delete</button>
+            <% movies.forEach((movie)=> { %>
+                <div class="col-4">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="<%= movie.movimage %>
+                                    class=" img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h5 class="card-title m-0 text-danger">
+                                            <%= movie.title %>
+                                        </h5>
+                                        <span class="px-3 py-2 text-white bg-dark rounded-pill ">
+                                            <%= movie.genre %>
+                                        </span>
+                                    </div>
+                                    <p class="card-text mt-2 mb-1">
+                                        <%= movie.description %>
+                                    </p>
+                                    <div class="d-flex align-items-center mt-3">
+                                        <span class="px-3 py-1 border border-success rounded-pill"> Yr: <%= movie.year %>
+                                        </span>
+                                        <span class="px-3 py-1 bg-light text-warning border border-warning rounded-pill">
+                                            Rating : <%= movie.rating %></span>
+                                    </div>
+                                    <div class="text-end mt-3 d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <button class="btn btn-outline-dark">Edit</button>
+                                            <button class="btn btn-outline-dark">Delete</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <% }) %>
         </div>
     </div>
     <%- include('../Partials/Footer') %>

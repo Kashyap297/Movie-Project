@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const ejs = require('ejs')
 const fs = require('fs')
+const multer = require('multer')
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -11,6 +13,19 @@ app.set('view engine', 'ejs')
 
 const { movieModel } = require('./schema.js')
 
+const storage = multer.diskStorage(
+    {
+        destination: (req, file, cb) => {
+            return cb(null, './upload')
+        },
+        filename: (req, file, cb) => {
+            return cb(null, Date.now() + file.originalname)
+        }
+    }
+)
+
+var upload = multer({ storage: storage }).single('file')
+
 // home
 app.get('/', (req, res) => {
     res.render('./Pages/home')
@@ -18,7 +33,7 @@ app.get('/', (req, res) => {
 
 // retrive Data
 app.get('/movielist', async (req, res) => {
-    const movies = await movieModel.find()
+    const movies = await movieModel.find({})
     res.render('./Pages/index', { movies: movies })
 })
 
@@ -27,14 +42,36 @@ app.get('/addmovie', (req, res) => {
     res.render('./Pages/addmovie')
 })
 
+
 // post data
-app.post('/addbook', async (req, res) => {
-    const book = req.body;
+app.post('/upload', async (req, res) => {
+    upload(req, res, async () => {
+        if (req.file) {
+            var details = {
+                title: req.body.title,
+                description: req.body.description,
+                year: req.body.year,
+                genre: req.body.genre,
+                rating: req.body.rating,
+                movimage: req.file.filename
+            }
 
-    const newBook = new movieModel(book);
-    await newBook.save();
+            if (!/^\d{4}$/.test(details.year)) {
+                return res.status(400).send("Invalid year format.");
+            }
 
-    res.redirect('/booklist')
+            const movie = new movieModel(details)
+            try {
+                await movie.save();
+                res.redirect('/movielist');
+            } catch (error) {
+                console.error(error);
+                res.status(500).send("Error saving movie details.");
+            }
+        } else {
+
+        }
+    })
 })
 
 
