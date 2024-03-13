@@ -76,30 +76,71 @@ app.post('/upload', async (req, res) => {
 
 
 // deleteData
-app.get('/deleteBook/:id', async (req, res) => {
-    const userId = req.params.id;
-    var result = await movieModel.deleteOne(({ _id: userId }))
-    res.redirect('/booklist')
+app.get('/deleteData/:id', async (req, res) => {
+    var id = req.params.id
+    var image = await movieModel.findOne({ _id: id })
+    var result = await movieModel.deleteOne({ _id: id })
+    if (result.acknowledged) {
+        fs.unlink(`upload/${image.movimage}`, (err) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log("success");
+        })
+        res.redirect('/movielist')
+    }
 })
 
 // edit Data
-app.get('/editBook/:id', async (req, res) => {
-    const userId = req.params.id;
-
-    const book = await movieModel.findById(userId);
-
-    res.render('./Pages/editbook', { book });
+app.get('/editData/:id', async (req, res) => {
+    var id = req.params.id
+    var result = await movieModel.findOne({ _id: id })
+    res.render('./Pages/editmovie', { movies: result })
 })
 
-// post Data
-app.post('/editBook/:id', async (req, res) => {
-    const userId = req.params.id;
-    const updatedBookData = req.body;
+app.post('/editData/:id', async (req, res) => {
+    var id = req.params.id;
+    upload(req, res, async () => {
+        try {
+            var oldMovie = await movieModel.findOne({ _id: id });
 
-    const updatedBook = await movieModel.findByIdAndUpdate(userId, updatedBookData, { new: true });
+            var details = {
+                title: req.body.title,
+                description: req.body.description,
+                year: req.body.year,
+                genre: req.body.genre,
+                rating: req.body.rating,
+            };
 
-    res.redirect('/booklist');
-})
+            // Check if a new file is uploaded
+            if (req.file) {
+                // Delete old movie poster file
+                if (oldMovie.movimage) {
+                    fs.unlink(`upload/${oldMovie.movimage}`, (err) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("Old image deleted successfully");
+                        }
+                    });
+                }
+                details.movimage = req.file.filename;
+            } else {
+                // If no new file is uploaded, retain the existing movie poster
+                details.movimage = oldMovie.movimage;
+            }
+
+            // Update movie details
+            await movieModel.updateOne({ _id: id }, details);
+            res.redirect('/movielist');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send("Error updating movie details.");
+        }
+    });
+});
+
+
 
 // port Listen at
 app.listen(8000, () => {

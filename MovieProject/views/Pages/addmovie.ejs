@@ -42,7 +42,7 @@
                             <option value="Fantasy">Fantasy</option>
                             <option value="Thriller">Thriller</option>
                             <option value="Mystery">Mystery</option>
-                            <option value="Sci-">Sci-Fi</option>
+                            <option value="Sci-Fi">Sci-Fi</option>
                             <option value="Romance">Romance</option>
                             <option value="Animation">Animation</option>
                             <option value="Musical">Musical</option>
@@ -56,7 +56,7 @@
                             <p class="text-danger m-0 ms-4" id="ratingError"></p>
                         </div>
                         <select id="dropdown" class="form-control" name="rating">
-                            <option value="--rating--" selected>--Rating--</option>
+                            <option value="--Rating--" selected>--Rating--</option>
                             <option value="0.5">0.5</option>
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
@@ -124,7 +124,7 @@
                 } else {
                     genreError.innerText = ""
                 }
-                if (e.rating.value === "" || e.rating.value === "--rating--") {
+                if (e.rating.value === "" || e.rating.value === "--Rating--") {
                     ratingError.innerText = "Required*";
                     isValid = false;
                 } else {

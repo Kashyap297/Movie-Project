@@ -1,0 +1,155 @@
+    <%- include('../Partials/Header') %>
+        <div class="d-flex align-items-center justify-content-center vh-80">
+            <div class="col-4">
+                <form action="" method="POST" class="border p-3  rounded bg-white shadow-lg"
+                    onsubmit="return validateForm(this)" enctype="multipart/form-data">
+                    <h3 class="text-secondary text-center mb-3">Edit Movie Details</h3>
+
+                    <div class="col-12 mt-2">
+                        <div class="d-flex justify-content-between">
+                            <label for="" class="text-secondary">Movie Title :</label>
+                            <p class="text-danger m-0" id="nameError"></p>
+                        </div>
+                        <input type="text" name="title" class="form-control" value="<%= movies.title %>"
+                            placeholder="Enter Movie Title">
+                    </div>
+                    <div class="col-12 mt-2">
+                        <div class="d-flex justify-content-between">
+                            <label for="" class="text-secondary">Movie description :</label>
+                            <p class="text-danger m-0" id="descError"></p>
+                        </div>
+                        <input type="text" name="description" class="form-control" value="<%= movies.description %>"
+                            placeholder="Enter Movie description">
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <div class="col-4">
+                            <div class="d-flex justify-content-between">
+                                <label for="" class="text-secondary">Year :</label>
+                                <p class="text-danger m-0" id="yearError"></p>
+                            </div>
+                            <input type="number" name="year" value="<%= movies.year %>" class="form-control"
+                                placeholder="Released Year">
+                        </div>
+                        <div class="col-4">
+                            <div class="d-flex">
+                                <label for="dropdown" class="text-secondary me-3">Genre :</label>
+                                <p class="text-danger m-0 ms-4" id="genreError"></p>
+                            </div>
+                            <select id="genreDropdown" class="form-control" name="genre">
+                                <option value="--Select Genre--" <%=movies.genre==="--Select Genre--" ? "selected" : "" %>
+                                    >--Select Genre--</option>
+                                <option value="Action" <%=movies.genre==="Action" ? "selected" : "" %>>Action</option>
+                                <option value="Adventure" <%=movies.genre==="Adventure" ? "selected" : "" %>>Adventure
+                                </option>
+                                <option value="Comedy" <%=movies.genre==="Comedy" ? "selected" : "" %>>Comedy</option>
+                                <option value="Drama" <%=movies.genre==="Drama" ? "selected" : "" %>>Drama</option>
+                                <option value="Horror" <%=movies.genre==="Horror" ? "selected" : "" %>>Horror</option>
+                                <option value="Fantasy" <%=movies.genre==="Fantasy" ? "selected" : "" %>>Fantasy</option>
+                                <option value="Thriller" <%=movies.genre==="Thriller" ? "selected" : "" %>>Thriller</option>
+                                <option value="Mystery" <%=movies.genre==="Mystery" ? "selected" : "" %>>Mystery</option>
+                                <option value="Sci-Fi" <%=movies.genre==="Sci-Fi" ? "selected" : "" %>>Sci-Fi</option>
+                                <option value="Romance" <%=movies.genre==="Romance" ? "selected" : "" %>>Romance</option>
+                                <option value="Animation" <%=movies.genre==="Animation" ? "selected" : "" %>>Animation
+                                </option>
+                                <option value="Musical" <%=movies.genre==="Musical" ? "selected" : "" %>>Musical</option>
+                                <option value="Historical" <%=movies.genre==="Historical" ? "selected" : "" %>>Historical
+                                </option>
+                                <option value="Documentary" <%=movies.genre==="Documentary" ? "selected" : "" %>>Documentary
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-4 pe-3">
+                            <div class="d-flex">
+                                <label for="dropdown" class="text-secondary me-3">Rating :</label>
+                                <p class="text-danger m-0 ms-4" id="ratingError"></p>
+                            </div>
+                            <select id="ratingDropdown" class="form-control" name="rating">
+                                <option value="--rating--" <%=movies.rating==="--rating--" ? "selected" : "" %>>--Rating--
+                                </option>
+                                <option value="0.5" <%=movies.rating==="0.5" ? "selected" : "" %>>0.5</option>
+                                <option value="1" <%=movies.rating==="1" ? "selected" : "" %>>1</option>
+                                <option value="1.5" <%=movies.rating==="1.5" ? "selected" : "" %>>1.5</option>
+                                <option value="2" <%=movies.rating==="2" ? "selected" : "" %>>2</option>
+                                <option value="2.5" <%=movies.rating==="2.5" ? "selected" : "" %>>2.5</option>
+                                <option value="3" <%=movies.rating==="3" ? "selected" : "" %>>3</option>
+                                <option value="3.5" <%=movies.rating==="3.5" ? "selected" : "" %>>3.5</option>
+                                <option value="4" <%=movies.rating==="4" ? "selected" : "" %>>4</option>
+                                <option value="4.5" <%=movies.rating==="4.5" ? "selected" : "" %>>4.5</option>
+                                <option value="5" <%=movies.rating==="5" ? "selected" : "" %>>5</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-7 mt-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="dropdown" class="text-secondary me-3">Movie Poster :</label>
+                                <p class="text-danger m-0 ms-4" id="picError"></p>
+                            </div>
+                            <input type="file" name="file" class="form-control">
+                        </div>
+                        <div class="col-5">
+                            <img src="/<%= movies.movimage%>" alt="" width="150" class="mt-3">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <button class="btn btn-outline-dark mt-2 text-center">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <%- include('../Partials/Footer') %>
+            <script>
+                const validateForm = (e) => {
+                    let isValid = true;
+                    const nameError = document.getElementById("nameError");
+                    const descError = document.getElementById("descError");
+                    const yearError = document.getElementById("yearError");
+                    const genreError = document.getElementById("genreError");
+                    const ratingError = document.getElementById("ratingError");
+                    const picError = document.getElementById("picError");
+
+                    const authorError = document.getElementById("authorError");
+                    const dateError = document.getElementById("dateError");
+
+                    if (e.title.value === "") {
+                        nameError.innerText = "Title Required*";
+                        isValid = false;
+                    } else {
+                        nameError.innerText = ""
+                    }
+                    if (e.description.value === "") {
+                        descError.innerText = "Description Required*";
+                        isValid = false;
+                    } else {
+                        descError.innerText = ""
+                    }
+                    if (e.year.value === "") {
+                        yearError.innerText = "Year Required*";
+                        isValid = false;
+                    } else {
+                        yearError.innerText = ""
+                    }
+                    if (e.genre.value === "" || e.genre.value === "--Select Genre--") {
+                        genreError.innerText = "Required*";
+                        isValid = false;
+                    } else {
+                        genreError.innerText = ""
+                    }
+                    if (e.rating.value === "" || e.rating.value === "--rating--") {
+                        ratingError.innerText = "Required*";
+                        isValid = false;
+                    } else {
+                        ratingError.innerText = ""
+                    }
+                    // if (!e.file.value) {
+                    //     picError.innerText = "Please select a movie poster*";
+                    //     isValid = false;
+                    // } else {
+                    //     picError.innerText = "";
+                    // }
+
+                    return isValid
+                }
+            </script>
