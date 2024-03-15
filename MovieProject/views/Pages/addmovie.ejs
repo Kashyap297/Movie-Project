@@ -25,7 +25,7 @@
                             <label for="" class="text-secondary">Year :</label>
                             <p class="text-danger m-0" id="yearError"></p>
                         </div>
-                        <input type="number" name="year" class="form-control" placeholder="Released Year">
+                        <input type="date" name="year" class="form-control" placeholder="Released Date">
                     </div>
                     <div class="col-4">
                         <div class="d-flex">
@@ -97,9 +97,6 @@
                 const ratingError = document.getElementById("ratingError");
                 const picError = document.getElementById("picError");
 
-                const authorError = document.getElementById("authorError");
-                const dateError = document.getElementById("dateError");
-
                 if (e.title.value === "") {
                     nameError.innerText = "Title Required*";
                     isValid = false;
@@ -113,7 +110,7 @@
                     descError.innerText = ""
                 }
                 if (e.year.value === "") {
-                    yearError.innerText = "Year Required*";
+                    yearError.innerText = "Date Required*";
                     isValid = false;
                 } else {
                     yearError.innerText = ""

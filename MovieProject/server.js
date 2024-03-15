@@ -56,10 +56,6 @@ app.post('/upload', async (req, res) => {
                 movimage: req.file.filename
             }
 
-            if (!/^\d{4}$/.test(details.year)) {
-                return res.status(400).send("Invalid year format.");
-            }
-
             const movie = new movieModel(details)
             try {
                 await movie.save();
@@ -111,13 +107,7 @@ app.post('/editData/:id', async (req, res) => {
                 rating: req.body.rating,
             };
 
-            if (!/^\d{4}$/.test(details.year)) {
-                return res.status(400).send("Invalid year format.");
-            }
-            
-            // Check if a new file is uploaded
             if (req.file) {
-                // Delete old movie poster file
                 if (oldMovie.movimage) {
                     fs.unlink(`upload/${oldMovie.movimage}`, (err) => {
                         if (err) {
@@ -129,11 +119,8 @@ app.post('/editData/:id', async (req, res) => {
                 }
                 details.movimage = req.file.filename;
             } else {
-                // If no new file is uploaded, retain the existing movie poster
                 details.movimage = oldMovie.movimage;
             }
-
-            // Update movie details
             await movieModel.updateOne({ _id: id }, details);
             res.redirect('/movielist');
         } catch (error) {
